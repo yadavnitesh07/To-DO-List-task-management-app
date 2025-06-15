@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager Dashboard</title>
+    <link href="./output.css" rel="stylesheet" />
+
+    <script defer src="app.js"></script>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="https://somecdn.com/favicon.ico" />
+
+
+  </head>
+  <body class="bg-white text-black font-sans">
+    <div class="min-h-screen flex flex-col md:flex-row">
+      <!-- Sidebar -->
+      <aside class="bg-black text-white w-full md:w-64 p-4 flex flex-col justify-between rounded-r-3xl">
+        <div>
+          <div class="text-2xl font-bold mb-8">t.</div>
+          <nav class="space-y-4">
+            <button class="flex items-center space-x-2 w-full text-left bg-white text-black px-4 py-2 rounded-lg">
+              <span class="font-semibold">Dashboard</span>
+            </button>
+            <button class="w-full text-left px-4 py-2 hover:bg-gray-800 rounded">Analytics</button>
+            <button class="w-full text-left px-4 py-2 hover:bg-gray-800 rounded">Teams</button>
+            <button class="w-full text-left px-4 py-2 hover:bg-gray-800 rounded">Documents</button>
+            <button class="w-full text-left px-4 py-2 hover:bg-gray-800 rounded">Settings</button>
+          </nav>
+        </div>
+        <div class="text-sm px-4 mt-6">
+          <label class="block mb-1">Workspace</label>
+          <select class="w-full bg-gray-800 text-white rounded px-2 py-1">
+            <option>Tino Digital Agency</option>
+          </select>
+        </div>
+      </aside>
+
+
+
+      <!-- Main Content -->
+      <main class="flex-1 p-6 space-y-6">
+        <!-- Header Section -->
+        <section class="flex flex-col md:flex-row md:justify-between items-start md:items-center">
+          <div>
+            <h2 class="text-2xl font-bold">Hello, Jessica!</h2>
+            <p class="text-gray-600">You've got <span id="task-count">0</span> tasks today</p>
+          </div>
+          <div class="flex items-center space-x-4 mt-4 md:mt-0">
+            <img src="https://via.placeholder.com/40" alt="Avatar" class="rounded-full w-10 h-10" />
+            <div class="text-sm">
+              <div class="font-semibold">Jessica Smith</div>
+              <div class="text-gray-500">UI/UX Designer</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Search and Timer -->
+        <section class="space-y-4">
+          <input
+            type="text"
+            placeholder="Search something..."
+            class="w-full border border-gray-300 px-4 py-2 rounded-xl focus:outline-none"
+          />
+          <div class="bg-white shadow rounded-xl p-4 flex items-center justify-between">
+            <div>
+              <h3 class="font-semibold">Project time tracker</h3>
+              <p class="text-sm text-gray-600">You can start tracking.</p>
+            </div>
+            <button class="bg-yellow-400 p-2 rounded-full hover:bg-yellow-500">
+              ▶
+            </button>
+          </div>
+        </section>
+
+        <!-- Task Filters -->
+        <section class="flex space-x-4 text-sm font-semibold border-b pb-2">
+          <button onclick="filterTasks('all')">Recently</button>
+          <button onclick="filterTasks('today')">Today</button>
+          <button onclick="filterTasks('upcoming')">Upcoming</button>
+          <button onclick="filterTasks('later')">Later</button>
+        </section>
+
+        <!-- Task List -->
+        <section id="task-list" class="grid md:grid-cols-2 gap-4">
+          <!-- Tasks will be injected here -->
+        </section>
+
+        <!-- Add Task -->
+        <section class="space-y-2">
+          <input
+            id="new-task-input"
+            type="text"
+            placeholder="Add a new task..."
+            class="w-full border border-gray-300 px-4 py-2 rounded-xl"
+          />
+          <button
+            onclick="addTask()"
+            class="bg-black text-white px-4 py-2 rounded-xl hover:bg-gray-800"
+          >
+            Add Task
+          </button>
+        </section>
+
+
+
+        <!-- Footer Options -->
+        <section class="flex justify-between text-sm text-gray-600">
+          <button onclick="clearCompleted()">Clear completed tasks</button>
+          <div>
+            <span id="all-count">0</span> All |
+            <span id="active-count">0</span> Active |
+            <span id="completed-count">0</span> Completed
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
