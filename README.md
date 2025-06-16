@@ -29,6 +29,13 @@ A responsive and feature-rich To-Do List Dashboard with task tracking, filtering
 - **Vercel** for deployment
 
 ---
+##  Design & UI References
+
+- Designed and planned using **Figma**
+- Used layout inspiration/templates from Figma community resources
+- Converted design mockups into fully responsive code using Tailwind CSS utility classes
+
+---
 
 ##  How to Run Locally
 
