@@ -48,14 +48,112 @@
 
         <!-- Button -->
         <div class="mb-10">
-           <button 
-  onclick="window.location.href='dashboard.html'"
-  class="bg-black text-white text-lg px-6 py-3 rounded-xl w-full hover:bg-gray-800 transition-all duration-300">
-  Get started
-</button>
-
+            <button id="getStartedBtn"
+                class="bg-black text-white text-lg px-6 py-3 rounded-xl w-full hover:bg-gray-800 transition-all duration-300">
+                Get started
+            </button>
         </div>
     </div>
+
+    <!-- Hidden Login Modal -->
+
+    <!-- Auth Modal -->
+<div id="authModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
+  <div class="bg-white p-6 rounded-xl shadow-md w-full max-w-md relative">
+    <!-- Tab Switch -->
+    <div class="flex justify-between mb-4">
+      <button id="showLogin" class="w-1/2 py-2 font-semibold border-b-2 border-black">Login</button>
+      <button id="showRegister" class="w-1/2 py-2 font-semibold text-gray-500">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-4">
+      <input type="text" id="loginUsername" placeholder="Enter your name" class="w-full px-4 py-2 border rounded" required />
+      <input type="password" id="loginPassword" placeholder="Enter your password" class="w-full px-4 py-2 border rounded" required />
+      <button type="submit" class="w-full bg-black text-white py-2 rounded hover:bg-gray-800">Login</button>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="space-y-4 hidden">
+      <input type="text" id="registerUsername" placeholder="Choose a username" class="w-full px-4 py-2 border rounded" required />
+      <input type="password" id="registerPassword" placeholder="Create a password" class="w-full px-4 py-2 border rounded" required />
+      <button type="submit" class="w-full bg-black text-white py-2 rounded hover:bg-gray-800">Register</button>
+    </form>
+  </div>
+</div>
+
+
+    <!-- logic for login/register page -->
+
+  <script>
+  const authModal = document.getElementById("authModal");
+  const getStartedBtn = document.getElementById("getStartedBtn");
+  const showLogin = document.getElementById("showLogin");
+  const showRegister = document.getElementById("showRegister");
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+
+  getStartedBtn.addEventListener("click", () => {
+    authModal.classList.remove("hidden");
+    loginForm.classList.remove("hidden");
+    registerForm.classList.add("hidden");
+    showLogin.classList.add("border-black");
+    showRegister.classList.remove("border-black");
+  });
+
+  showLogin.addEventListener("click", () => {
+    loginForm.classList.remove("hidden");
+    registerForm.classList.add("hidden");
+    showLogin.classList.add("border-black", "text-black");
+    showRegister.classList.remove("border-black");
+    showRegister.classList.add("text-gray-500");
+  });
+
+  showRegister.addEventListener("click", () => {
+    loginForm.classList.add("hidden");
+    registerForm.classList.remove("hidden");
+    showRegister.classList.add("border-black", "text-black");
+    showLogin.classList.remove("border-black");
+    showLogin.classList.add("text-gray-500");
+  });
+
+  // Registration Logic
+  document.getElementById("registerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = document.getElementById("registerUsername").value;
+    const password = document.getElementById("registerPassword").value;
+
+    if (username && password) {
+      localStorage.setItem("user", JSON.stringify({ username, password }));
+      alert("Registration successful. Now login.");
+      showLogin.click();
+    } else {
+      alert("All fields are required.");
+    }
+  });
+
+  // Login Logic
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    if (savedUser && username === savedUser.username && password === savedUser.password) {
+      localStorage.setItem("username", username); // Set for dashboard use
+      window.location.href = "dashboard.html";
+    } else {
+      alert("Invalid credentials.");
+    }
+  });
+
+   // ✅ ESC key to close modal
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") authModal.classList.add("hidden");
+  });
+</script>
+
+
 </body>
 
 </html>
